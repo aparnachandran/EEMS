@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout 
+    android:id="@+id/contentLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true" >
+    
+    <EditText
+        android:id="@+id/employeeID"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:maxWidth="200dp"
+        android:layout_alignParentTop="true"
+        android:maxLines="1"
+        android:hint="EmployeeID"
+        /> 
+	<EditText
+        android:id="@+id/password"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:maxWidth="200dp"
+        android:layout_below="@id/employeeID"
+        android:inputType="textPassword"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:maxLines="1"
+        android:hint="Password"
+        />
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password"
+        android:layout_alignParentLeft="true"
+        android:text="Submit"
+        
+        />
+    <Button
+        android:id="@+id/clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password"
+        android:layout_toRightOf="@id/submit"
+        android:text="Clear"
+        
+        />
+  </RelativeLayout>  
+  
+    <RelativeLayout 
+    android:id="@+id/warningLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_below="@id/contentLayout"
+    android:layout_marginTop="10dp"
+    android:visibility="invisible" >
+    
+        <TextView 
+            android:id="@+id/warningText"
+            android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:layout_centerHorizontal="true"
+    		android:layout_centerVertical="true"
+    		android:text="Invalid Username or Password" />
+        
+    </RelativeLayout> 
+</RelativeLayout>
