@@ -67,6 +67,7 @@
     		android:layout_height="wrap_content"
     		android:layout_centerHorizontal="true"
     		android:layout_centerVertical="true"
+    		android:textColor="#FF0000"
     		android:text="Invalid Username or Password" />
         
     </RelativeLayout> 

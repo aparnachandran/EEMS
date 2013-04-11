@@ -10,7 +10,7 @@ public class Fonts {
 	public static final int HELVETICA = 1;
 	public static final int CHUNKFIVE = 2;
 	public static final int COMIC_SANS =3;
-	
+	public static final int SANSATION_BOLD =4;
 	
 	
 	
@@ -28,13 +28,15 @@ public class Fonts {
 		case COMIC_SANS:
 			tf = Typeface.createFromAsset(mContext.getAssets(), "Comic_Sans.ttf");
 			break;
-		
+		case SANSATION_BOLD:
+			tf = Typeface.createFromAsset(mContext.getAssets(), "Sansation_Bold.ttf");
+			break;
 			
 		default:
 			tf = Typeface.DEFAULT;
 			break;
 		}
-
+ 
 		return tf;
 	}
 }

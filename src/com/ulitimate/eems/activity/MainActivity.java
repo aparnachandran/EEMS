@@ -1,6 +1,6 @@
 package com.ulitimate.eems.activity;
 
-
+ 
 
 import com.ultimate.eems.utils.Fonts;
 
@@ -15,15 +15,17 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+//This is the main activity
 public class MainActivity extends Activity {
 
 	/*
 	 * TYPE DECLARATIONS
 	 * 
-	 * */
+	 * */  
 	
 	//System Memory field variables
 	SharedPreferences Prefs;
+	SharedPreferences.Editor editor;
 	
 	//View variables
 	EditText employeeId,password;
@@ -33,9 +35,6 @@ public class MainActivity extends Activity {
 	//Layout Ids
 	RelativeLayout warningLayout;
 	
-	
-	
-	
 	 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,33 +43,46 @@ public class MainActivity extends Activity {
 		
 		//Checks whether the App is not yet registered
 		Prefs = getSharedPreferences("EEMS", 0);
-		SharedPreferences.Editor editor = Prefs.edit();
-		int flag = Prefs.getInt("LOGIN", -1);
-		if(flag==-1){
+		editor = Prefs.edit();
+		
+		//this flag value will check, whether the employee/manager is login for first time or not
+		//if LoginStatus = -1, means not yet registred.
+		//else the user either employee or manager is already regisered.
+		int loginStatus = Prefs.getInt("LOGIN", -1);
+		if(loginStatus==-1){
 			setContentView(R.layout.activity_main_login);
 			 
 			//This method will call, to register the user whether Employee or Supervisor
 			registerUser();
 			
-			/*editor.putInt("LOGIN",1);
-			editor.commit(); */
+			
 			
 			
 			 
 			
 		}else{
-			/*setContentView(R.layout.activity_main_employee);
-			userPage();*/
+			int userType = Prefs.getInt("TYPE", -1);
+			if(userType != -1){
+				
+				if(userType == 0){
+					employeePage();
+				}
+				else if(userType == 1){
+					managerPage();
+				}
+				else{
+					
+				}
+				
+			}
+			
 		}
 		
 	}
 
 
 
-	private void userPage() {
-		
-		
-	}
+	
 
 
  
@@ -82,9 +94,9 @@ public class MainActivity extends Activity {
 		warningText = (TextView)findViewById(R.id.warningText);
 		clear = (Button)findViewById(R.id.clear);
 		
-		employeeId.setTypeface(Fonts.getTypeFace(getApplicationContext(), Fonts.CHUNKFIVE));
-		password.setTypeface(Fonts.getTypeFace(getApplicationContext(), Fonts.CHUNKFIVE));
-		submit.setTypeface(Fonts.getTypeFace(getApplicationContext(), Fonts.CHUNKFIVE));
+		employeeId.setTypeface(Fonts.getTypeFace(getApplicationContext(), Fonts.SANSATION_BOLD));
+		password.setTypeface(Fonts.getTypeFace(getApplicationContext(), Fonts.SANSATION_BOLD));
+		submit.setTypeface(Fonts.getTypeFace(getApplicationContext(), Fonts.SANSATION_BOLD));
 		
 		submit.setOnClickListener(new OnClickListener() {
 			
@@ -105,7 +117,7 @@ public class MainActivity extends Activity {
 		
 		
 	}
-
+ 
 
 
 	private void submitActions() {
@@ -119,10 +131,20 @@ public class MainActivity extends Activity {
 			}
 			
 			if(userID.startsWith("EMP")){
+				editor.putInt("LOGIN",1);
+				editor.commit();
 				
+				editor.putInt("TYPE", 0);
+				editor.commit();
+				employeePage();
 			}
 			else if(userID.startsWith("MNG")){
+				editor.putInt("LOGIN",1);
+				editor.commit();
 				
+				editor.putInt("TYPE", 1);
+				editor.commit();
+				managerPage();
 			}
 			else{
 				
@@ -140,6 +162,19 @@ public class MainActivity extends Activity {
 				warningLayout.setVisibility(View.VISIBLE);
 			}
 		}
+		
+	}
+
+
+
+	private void employeePage() {
+		setContentView(R.layout.activity_main_employee);
+	}
+
+
+
+	private void managerPage() {
+		setContentView(R.layout.activity_main_manager);
 		
 	}
 
